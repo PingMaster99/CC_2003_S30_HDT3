@@ -8,6 +8,10 @@ public class SortMethods {
 
     }
 
+
+
+
+
     // Llama a merge
     public static List<Integer> mergeSort(List<Integer> data) {
         if(data.size() == 1) {
@@ -20,16 +24,22 @@ public class SortMethods {
     private static List<Integer> divideLists(List<Integer> data) {
         List<Integer> sorted = new ArrayList<>();
         int start = 0;
-
+        List<Integer> firstHalf = new ArrayList<Integer>();
+        List<Integer> secondHalf = new ArrayList<Integer>();
         if(data.size() > 1) {
             int middle = data.size()/2;
             int end = data.size();
-            List<Integer> firstHalf = data.subList(start, middle);
-            List<Integer> secondHalf = data.subList(middle, end);
+
+            for(int i = 0; i < middle; i++) {
+                firstHalf.add(data.get(i));
+            }
+
+            for(int j = middle; j<data.size(); j++ ) {
+                secondHalf.add(data.get(j));
+            }
 
             divideLists(firstHalf);
             divideLists(secondHalf);
-
             sorted = merge(firstHalf, secondHalf, data);
         }
 
