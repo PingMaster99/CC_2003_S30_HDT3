@@ -1,15 +1,34 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SortMethods {
-    public void selectionSort(int[] unsortedData) {
 
+    public static void selectionSort(List<Integer> unsortedData) {
+        int minValueIndex;
+        int i;
+
+        for(i = 0; i < unsortedData.size() - 1; i++) {
+
+            minValueIndex = i;
+
+            for(int j = i + 1; j < unsortedData.size(); j++) {
+                if(unsortedData.get(j) < unsortedData.get(minValueIndex)){
+                    minValueIndex = j;
+                    System.out.println("j " + minValueIndex);
+                }
+            }
+            Collections.swap(unsortedData, minValueIndex, i);
+        }
     }
 
+    public static List<Integer> insertionSort(List<Integer> data) {
+        List<Integer> sortedList = new ArrayList<>();
 
-
+        return sortedList;
+    }
 
 
     // Llama a merge
@@ -80,6 +99,71 @@ public class SortMethods {
 
         System.out.println("data " + data);
         return data;
+    }
+
+    // Quicksort prototype
+    /*public static List<Integer> quickSort(List<Integer> unsortedData) {
+        int pivot = unsortedData.get(0);
+        System.out.println(pivot + " this is the pivot");
+        int itemFromLeft = -100;
+        int itemFromRight = unsortedData.size() + 1;
+        int control = 0;
+        Collections.swap(unsortedData, 0, unsortedData.size() - 1);
+
+        while(itemFromLeft <= itemFromRight && control<unsortedData.size()) {
+            for(int i = 0; i < unsortedData.size() - 1; i++) {
+                if(unsortedData.get(i) > pivot) {
+                    itemFromLeft = i;
+                    break;
+                }
+            }
+
+            for(int i = unsortedData.size() - 2; i >= 0; i--) {
+                if(unsortedData.get(i) < pivot) {
+                    itemFromRight = i;
+                    break;
+                }
+            }
+
+            if(itemFromLeft != -100 && itemFromRight != unsortedData.size() + 1) {
+                Collections.swap(unsortedData, itemFromLeft, itemFromRight);
+            }
+            control ++;
+
+        }
+
+        if(itemFromLeft != -100 && itemFromRight != unsortedData.size() + 1) {
+            Collections.swap(unsortedData, itemFromLeft, unsortedData.size() - 1);
+        }
+
+
+
+        return unsortedData;
+    } */
+
+
+
+    private static int quickSortDivide(List<Integer> data, int low, int high) {
+        int pivot = data.get(high);
+        int itemFromLeft = low - 1;
+        for(int i = low; i < high; i ++) {
+            if(data.get(i) < pivot) {
+                itemFromLeft++;
+                Collections.swap(data, itemFromLeft, i);
+            }
+        }
+
+        Collections.swap(data, itemFromLeft + 1, high);
+        return itemFromLeft + 1;
+    }
+
+    public static void quickSort(List<Integer> data, int low, int high) {
+        if(low < high) {
+            int partitionIndex = quickSortDivide(data, low, high);
+            quickSort(data, low, partitionIndex - 1);
+            quickSort(data, partitionIndex + 1, high);
+        }
+
     }
 
 
