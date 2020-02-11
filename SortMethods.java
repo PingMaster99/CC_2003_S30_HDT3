@@ -25,8 +25,26 @@ public class SortMethods {
     }
 
     public static List<Integer> insertionSort(List<Integer> data) {
-        List<Integer> sortedList = new ArrayList<>();
 
+        List<Integer> sortedList = new ArrayList<>();
+        int indexPosition = 0;
+
+            while(!data.isEmpty()) {
+                int value = data.remove(0);
+
+                for(int i = 0; i < sortedList.size(); i++) {
+                    System.out.println(sortedList.get(i));
+
+                    if(value >= sortedList.get(i)) {
+                        indexPosition = i + 1;
+                        System.out.println(indexPosition + " Index position");
+                    }
+                }
+
+                sortedList.add(indexPosition, value);
+                System.out.println(sortedList);
+                indexPosition = 0;
+            }
         return sortedList;
     }
 
